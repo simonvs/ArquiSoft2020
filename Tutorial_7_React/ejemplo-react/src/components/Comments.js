@@ -3,7 +3,10 @@ import Comment from './Comment'
 
 class Comments extends React.Component {
     render() {
-        return this.props.com.map(e => <Comment key={e.author} com={e} />)
+        return <div>
+            <h1>Comentarios:</h1>
+            {this.props.com.map(e => <Comment key={e.author} com={e} />)}
+        </div>
     }
 }
 
