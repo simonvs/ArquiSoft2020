@@ -139,6 +139,9 @@ NOTA: hay que importar la librería PropTypes al principio.
 
 ## Formularios o Forms
 
+Los formularios son los espacios para que el usuario ingrese información, en este caso sirven para ingresar un nuevo
+comentario, con el nombre y el texto, se implementaría de la siguiente forma:
+
 	import React from 'react';
 
 	class CommentForm extends React.Component {
@@ -150,6 +153,7 @@ NOTA: hay que importar la librería PropTypes al principio.
 
  	   onSubmit = e => {
  	    	console.log(this.state)
+            this.props.addComment(this.state.author, this.state.text);
  	    	e.preventDefault();
  	  	}
 
@@ -182,4 +186,50 @@ NOTA: hay que importar la librería PropTypes al principio.
  	   	}
 	}
 
-export default CommentForm;
+	export default CommentForm;
+
+Para que se agregue un comentario, se le tiene que pasar una función "addComment" en los props del CommentForm,
+o sea invocarlo de la siguiente manera:
+
+    <CommentForm addComment={this.addComment} />
+
+Y la función addComment se implementa en App.js, que simplemente recibe el autor y el texto y agrega un nuevo comentario al state de App.
+De esta manera (pasando funciones) se podría agregar un botón para eliminar un comentario.
+
+## React Router
+
+A través de los enrutadores podemos simular tener múltiples páginas, o sea agregar una ruta para mostrar
+un contenido u otro, y en react es sencillo implementarlo.
+
+    class App extends React.Component {
+
+        render() {
+            return <div>
+                <Router>
+                    <Link to="/">Home</Link>
+                    <br />
+                    <Link to="/posts">Posts</Link>
+                    <Route exact path="/" render={() => {
+                        return <div>
+                            <CommentForm addComment={this.addComment} />
+                            <Comments com={this.state.comments} />
+                        </div>
+                    }}>
+                    </Route>
+
+                    <Route path="/posts" component={Posts} />
+
+                </Router>
+
+            </div>
+        }
+    }
+
+    export default App;
+
+Los "Link" son los botones de navegación y cada etiqueta Route representa una página, que a su vez
+están todas dentro de una etiqueta router
+
+NOTA: Se deben importar estos componentes desde 'react-router-dom'
+
+    import { BrowserRouter as Router, Route, Link } from 'react-router-dom'

@@ -8,18 +8,18 @@ class CommentForm extends React.Component {
     }
 
     onSubmit = e => {
-        console.log(this.state)
+        this.props.addComment(this.state.author, this.state.text);
         e.preventDefault();
     }
 
     onChange = e => {
-        console.log(e.target.name, e.target.value)
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
     render() {
+
         return (
             <form onSubmit={this.onSubmit}>
                 <input
