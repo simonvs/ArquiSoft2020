@@ -8,9 +8,10 @@ Tutorial Fazt: https://www.youtube.com/watch?v=zIY87vU33aA&t=6027s&ab_channel=Fa
 Etiquetas HTML: https://www.mclibre.org/consultar/htmlcss/html/html-etiquetas.html
 
 
-React es una librería de javascript para construir interfaces de usuario, fue desarrollada por facebook en 2013.
-Es basada en componentes, que son partes reutilizables de la interfaz, y la implementación de un componente está muy simplificada.
-En este tutorial revisaremos los conceptos básicos de React con pequeños ejemplos.
+React es una librería de javascript para construir interfaces de usuario, fue desarrollada
+por facebook en 2013. Es basada en componentes, que son partes reutilizables de la interfaz,
+y la implementación de un componente está muy simplificada. En este tutorial revisaremos los
+conceptos básicos para comenzar a desarrollar en React con pequeños ejemplos.
 
 
 ## Implementación de un componente
