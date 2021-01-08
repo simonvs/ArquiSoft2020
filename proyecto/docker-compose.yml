@@ -58,5 +58,16 @@ services:
    networks:
       - network
 
+  nestor_database:
+   build:
+      context: ./nestor_database
+   container_name: nestor_database
+   networks:
+      - network
+   environment:
+      - RABBITMQ_HOST=rabbitmq
+   depends_on:
+      - rabbitmq
+
 networks:
   network: {}

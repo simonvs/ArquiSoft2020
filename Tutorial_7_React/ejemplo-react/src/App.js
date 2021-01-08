@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './App.css';
 import comments from './sample/comments.json'
@@ -41,7 +42,6 @@ class App extends React.Component {
 				<Route path="/posts" component={Posts} />
 
 			</Router>
-
 		</div>
 	}
 }
