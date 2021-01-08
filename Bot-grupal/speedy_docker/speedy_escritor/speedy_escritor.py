@@ -35,15 +35,15 @@ connection = pika.BlockingConnection(
     pika.ConnectionParameters(host=HOST))
 channel = connection.channel()
 
-#El consumidor utiliza el exchange 'nestor'
-channel.exchange_declare(exchange='nestor', exchange_type='topic', durable=True)
+#El consumidor utiliza el exchange 'speedy'
+channel.exchange_declare(exchange='speedy', exchange_type='topic', durable=True)
 
 #Se crea un cola temporaria exclusiva para este consumidor (búzon de correos)
 result = channel.queue_declare(queue="publicar_slack", exclusive=True, durable=True)
 queue_name = result.method.queue
 
 #La cola se asigna a un 'exchange'
-channel.queue_bind(exchange='nestor', queue=queue_name, routing_key="publicar_slack")
+channel.queue_bind(exchange='speedy', queue=queue_name, routing_key="publicar_slack")
 
 channel.basic_consume(
     queue=queue_name, on_message_callback=callback, auto_ack=True)

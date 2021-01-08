@@ -1,0 +1,52 @@
+version: '3.6'  
+services:
+  database:
+    image: mongo
+    container_name: speedy_mongo
+    environment:
+      - MONGO_INITDB_DATABASE=speedy_mensajes
+    volumes:
+      - ./mongodata:/data/db
+    ports:
+      - '27017-27019:27017-27019'
+
+  rabbitmq:
+   image: rabbitmq:3-management
+   ports:
+      # The standard AMQP protocol port
+      - '5673:5673'
+      # HTTP management UI
+      - '15672:15672'
+   networks:
+      - network
+   container_name: rabbitmq
+   restart: 'always'
+  
+  speedy_lector:
+   build:
+     context: ./speedy_lector
+   container_name: speedy_lector
+   environment:
+      - RABBITMQ_HOST=rabbitmq
+      - MONGO_HOST=database
+   depends_on:
+      - rabbitmq
+      - database
+   ports:
+      - 3000:3000   
+   networks:
+      - network
+
+  speedy_escritor:
+   build:
+     context: ./speedy_escritor
+   container_name: speedy_escritor
+   environment:
+      - RABBITMQ_HOST=rabbitmq
+   depends_on:
+      - rabbitmq   
+   networks:
+      - network
+
+networks:
+  network: {}
