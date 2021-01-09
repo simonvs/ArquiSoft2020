@@ -47,7 +47,7 @@ def find_between(s, first, last):
     except ValueError:
         return ""
 
-time.sleep(30)
+time.sleep(20)
 
 ############ CONEXION RABBITMQ ##############
 
@@ -79,6 +79,7 @@ print(os.environ.get("SLACK_TOKEN"))
 client = MongoClient(host=os.environ['MONGO_HOST'], port=int(os.environ['MONGO_PORT']))
 #databases = client.list_database_names()
 
+
 #if DATABASE not in (databases):
     #db = client[DATABASE]
     #mensajes = slack_web_client.conversations_history(channel="#desarrollo")
@@ -108,7 +109,7 @@ def message(payload):
         mensaje = "Para saber el último mensaje de un usuario escriba: 'último mensaje de @user' \n Para saber la cantidad de mensajes de un usuario: 'cúantos mensajes ha enviado @user'"
         start_onboarding_text(channel_id,mensaje)
     #Ver si es alguna de las consultas de último mensaje o cuantos mensajes
-    if "último mensaje" in text or "cúantos mensajes" in text:
+    if "último mensaje" in text or "cuántos mensajes" in text:
         user = find_between(text, '@', '>')
         print("El usuario es este: ",user)
         collection = db[user]

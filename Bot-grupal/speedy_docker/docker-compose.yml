@@ -9,6 +9,8 @@ services:
       - ./mongodata:/data/db
     ports:
       - '27017-27019:27017-27019'
+    networks: 
+      - network
 
   rabbitmq:
    image: rabbitmq:3-management
